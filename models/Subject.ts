@@ -2,5 +2,6 @@
 import mongoose = require("mongoose");
 
 let subject =mongoose.Schema({
-    name: String
+    name: String,
+    students: []
 });
