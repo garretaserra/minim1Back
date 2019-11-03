@@ -5,3 +5,5 @@ let phone = mongoose.Schema({
     description: String,
     number: String
 });
+
+module.exports = mongoose.model('Phone', phone);

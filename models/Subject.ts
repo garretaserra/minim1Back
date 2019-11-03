@@ -5,3 +5,5 @@ let subject =mongoose.Schema({
     name: String,
     students: []
 });
+
+module.exports = mongoose.model('Subject', subject);
