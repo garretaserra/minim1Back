@@ -7,6 +7,8 @@ import errorHandler = require('errorhandler');
 
 //Import routes
 let testRouter = require('./routes/test');
+let subjectRouter = require('./routes/subjectRoutes');
+let studentRouter = require('./routes/studentRoutes');
 
 //Server variable initialization
 let app = express();
@@ -15,6 +17,8 @@ app.use(bodyParser());
 app.use(errorHandler());
 
 app.use('/test', testRouter);
+app.use('/subject', subjectRouter);
+app.use('/student', studentRouter);
 
 
 //Make app listen on port 3000
@@ -23,7 +27,7 @@ console.log('Server listening on port 3000');
 module.exports = app;
 
 //Mongo database connection
-mongoose.connect("mongodb://localhost:27017/erasmus",{
+mongoose.connect("mongodb://localhost:27017/minim1",{
     useNewUrlParser: true,
     reconnectTries : Number.MAX_VALUE,
     autoReconnect : true,
@@ -45,7 +49,7 @@ mongoose.connection.on('error', (err: any) => {
 mongoose.connection.on('disconnected', () => {
     console.log('Database disconnected');
     //If database is disconnected it wil try again
-    mongoose.connect("mongodb://localhost:27017/erasmus",{
+    mongoose.connect("mongodb://localhost:27017/minim1",{
         useNewUrlParser: true,
         reconnectTries : Number.MAX_VALUE,
         autoReconnect : true,

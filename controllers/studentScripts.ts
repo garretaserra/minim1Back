@@ -3,13 +3,27 @@ export {};
 
 require('../models/Student');
 let mongoose = require('mongoose');
-let student = mongoose.model('Student');
+let Student = mongoose.model('Student');
 let ObjectId = require('mongodb').ObjectID;
 
 exports.addStudent = async function (req, res){
-
+    let student = req.body.student;
+    let newStudent = new Student(student);
+    let result = await newStudent.save();
+    if(result){
+        res.status(200).send(result);
+    }
+    else{
+        res.status(400).send(result);
+    }
 };
 
 exports.getStudent = async function (req, res){
+    let student =await Student.find();
 
+    if(student) {
+        res.status(200).json(student);
+    } else {
+        res.status(424).send({message: 'Subjects not found'});
+    }
 };
