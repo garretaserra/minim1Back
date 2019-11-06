@@ -2,21 +2,25 @@
 export {};
 
 require('../models/Subject');
+require('../models/Student');
 let mongoose = require('mongoose');
 let Subject = mongoose.model('Subject');
+let Student = mongoose.model('Student');
 let ObjectId = require('mongodb').ObjectID;
 
 exports.addSubject = async function (req, res){
-    let subject = req.body.student;
-    let newStudent = new Subject(subject);
-    await newStudent.save();
+    let subject = req.body.subject;
+    let newSubject = new Subject(subject);
+    let result = await newSubject.save();
+    res.status(200).send(result);
 };
 
 exports.addStudentToSubject = async function (req, res){
     let subject = req.body.subject;
-    let student = req.bosy.student;
+    let student = await Student.findOne({name: req.body.student.name});
 
-    let result = await Subject.updateOne({_id: subject._id}, {$push:{students: student}})
+    let result = await Subject.updateOne({name: subject.name}, {$push:{students: ObjectId(student._id)}})
+    res.status(200).send(result);
 };
 
 exports.getAllSubjects = async function (req, res){
