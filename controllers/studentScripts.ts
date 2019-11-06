@@ -27,3 +27,8 @@ exports.getStudent = async function (req, res){
         res.status(424).send({message: 'Student not found'});
     }
 };
+
+exports.getAllStudents = async function (req, res) {
+    let students = await Student.find();
+    res.status(200).json(students);
+};
