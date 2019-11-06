@@ -19,7 +19,8 @@ exports.addStudent = async function (req, res){
 };
 
 exports.getStudent = async function (req, res){
-    let student =await Student.find();
+    let s = req.query.id;
+    let student = await Student.find({id: s});
 
     if(student) {
         res.status(200).json(student);
