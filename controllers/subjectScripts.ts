@@ -24,8 +24,8 @@ exports.addStudentToSubject = async function (req, res){
 };
 
 exports.getAllSubjects = async function (req, res){
-    let subjects =await Subject.find();
-
+    let subjects =await Subject.find()
+    .populate('students');
     if(subjects) {
         res.status(200).json(subjects);
     } else {

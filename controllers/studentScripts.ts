@@ -20,11 +20,10 @@ exports.addStudent = async function (req, res){
 
 exports.getStudent = async function (req, res){
     let s = req.query.id;
-    let student = await Student.find({id: s});
-
+    let student = await Student.findOne({_id: s});
     if(student) {
         res.status(200).json(student);
     } else {
-        res.status(424).send({message: 'Subjects not found'});
+        res.status(424).send({message: 'Student not found'});
     }
 };
