@@ -32,3 +32,7 @@ exports.getAllStudents = async function (req, res) {
     let students = await Student.find();
     res.status(200).json(students);
 };
+
+exports.deleteStudent = async function (req, res) {
+
+};
