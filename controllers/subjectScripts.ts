@@ -33,4 +33,8 @@ exports.getAllSubjects = async function (req, res){
     }
 };
 
-
+exports.deleteSubject = async function(req, res){
+  let name = req.params.name;
+  let result = await Subject.deleteOne({name: name});
+  res.status(200).send(result);
+};
