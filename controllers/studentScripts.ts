@@ -2,10 +2,11 @@
 export {};
 
 require('../models/Student');
+require('mongodb').ObjectID;
 let mongoose = require('mongoose');
 let Student = mongoose.model('Student');
-let ObjectId = require('mongodb').ObjectID;
 
+//Add a new Student
 exports.addStudent = async function (req, res){
     let student;
     if(req.body.student)
@@ -22,6 +23,7 @@ exports.addStudent = async function (req, res){
     }
 };
 
+//Get a single Student with their ID
 exports.getStudent = async function (req, res){
     let s = req.query.id;
     let student = await Student.findOne({_id: s});
@@ -32,11 +34,13 @@ exports.getStudent = async function (req, res){
     }
 };
 
+//Get all students
 exports.getAllStudents = async function (req, res) {
     let students = await Student.find();
     res.status(200).json(students);
 };
 
+//Delete single student with their ID
 exports.deleteStudent = async function (req, res) {
 
 };
