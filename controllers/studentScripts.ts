@@ -7,7 +7,11 @@ let Student = mongoose.model('Student');
 let ObjectId = require('mongodb').ObjectID;
 
 exports.addStudent = async function (req, res){
-    let student = req.body.student;
+    let student;
+    if(req.body.student)
+         student = req.body.student;
+    else
+        res.status(400).send('No student object found');
     let newStudent = new Student(student);
     let result = await newStudent.save();
     if(result){
