@@ -38,3 +38,11 @@ exports.deleteSubject = async function(req, res){
   let result = await Subject.deleteOne({name: name});
   res.status(200).send(result);
 };
+
+exports.dropSubject = async function (req, res) {
+    let studentName = req.query.student;
+    let subjectName = req.query.subject;
+    let student = await Student.findOne({name: studentName});
+    let result = await Subject.updateOne({name: subjectName}, {$pull: {students: ObjectId(student._id)}});
+    res.status(200).send(result);
+};
