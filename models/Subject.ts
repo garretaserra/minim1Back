@@ -2,7 +2,7 @@
 import mongoose = require("mongoose");
 
 let subject =mongoose.Schema({
-    name: String,
+    name: {type: String, required: true, unique: true},
     students: [{type: mongoose.Types.ObjectId, ref: 'Student'}]
 });
 

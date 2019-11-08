@@ -2,8 +2,8 @@
 import mongoose = require("mongoose");
 
 let student = mongoose.Schema({
-    name: String,
-    address: String,
+    name: {type: String, required: true, unique: true},
+    address: {type: String, required: true},
     phones: [{
         description: String,
         number: String
