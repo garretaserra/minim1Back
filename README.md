@@ -40,12 +40,12 @@ tsc
 ```
 Run project
 ```
-nodemon index.js
+nodemon app.js
 ```
->For a script that executes both commands
+>For a script that executes both commands:
 ```
 npm run tsc
-```    
+```
 
 MongoDB is required to be running
 
