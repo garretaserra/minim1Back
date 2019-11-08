@@ -70,6 +70,6 @@ exports.studentsNotOnSubject = async function(req, res){
 
 exports.getSubjectsFromDegree = async function (req, res) {
   let degree: string = req.query.degree;
-  let subjects = await Subject.find({degree: degree});
+  let subjects = await Subject.find({degree: degree}).populate('students');
   res.status(200).send(subjects);
 };
