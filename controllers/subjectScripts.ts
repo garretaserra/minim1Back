@@ -1,8 +1,8 @@
 'use strict';
 export {};
 
-require('../models/Subject');
 require('../models/Student');
+require('../models/Subject');
 let mongoose = require('mongoose');
 let Subject = mongoose.model('Subject');
 let Student = mongoose.model('Student');
@@ -51,4 +51,19 @@ exports.dropSubject = async function (req, res) {
     let student = await Student.findOne({name: studentName});
     let result = await Subject.updateOne({name: subjectName}, {$pull: {students: ObjectId(student._id)}});
     res.status(200).send(result);
+};
+
+//Get all those students who are not on a subject
+exports.studentsNotOnSubject = async function(req, res){
+    let subjectName = req.query.subject;
+    let subject = await Subject.findOne({name: subjectName}).populate('students');
+    let enrolledStudents = subject.students;
+    let allStudents = await Student.find();
+    let resultStudents = Array();
+    allStudents.forEach(student=>{
+        if(enrolledStudents.filter(x=>x.name==student.name).length===0){
+            resultStudents.push(student);
+        }
+    });
+    res.status(200).send(resultStudents);
 };

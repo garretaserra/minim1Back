@@ -8,5 +8,6 @@ router.post('/add', subjectScripts.addSubject);
 router.post('/addNew', subjectScripts.addStudentToSubject);
 router.get('/delete/:name', subjectScripts.deleteSubject);
 router.get('/dropSubject', subjectScripts.dropSubject);
+router.get('/studentsNotEnrolled', subjectScripts.studentsNotOnSubject);
 
 module.exports = router;
