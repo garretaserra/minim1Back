@@ -43,5 +43,13 @@ exports.getAllStudents = async function (req, res) {
 
 //Delete single student with their ID
 exports.deleteStudent = async function (req, res) {
-
+    let id = req.params.id.toString();
+    let student = Student.findOne(ObjectId(id));
+    if(student){
+        student.remove();
+        res.status(200).send({message: 'user deleted'});
+    }
+    else{
+        res.status(400).send({error: 'student could not be deleted because it was not found'});
+    }
 };
