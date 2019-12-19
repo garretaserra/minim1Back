@@ -5,6 +5,7 @@ require('../models/Student');
 require('mongodb').ObjectID;
 let mongoose = require('mongoose');
 let Student = mongoose.model('Student');
+let ObjectId = require('mongodb').ObjectID;
 
 //Add a new Student
 exports.addStudent = async function (req, res){
@@ -25,8 +26,8 @@ exports.addStudent = async function (req, res){
 
 //Get a single Student with their ID
 exports.getStudent = async function (req, res){
-    let s = req.query.id;
-    let student = await Student.findOne({_id: s});
+    let id = req.params.id.toString();
+    let student = await Student.findOne(ObjectId(id));
     if(student) {
         res.status(200).json(student);
     } else {
