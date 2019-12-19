@@ -16,6 +16,13 @@ exports.addSubject = async function (req, res){
     res.status(200).send(result);
 };
 
+//Get Subject from id
+exports.getSubject = async function(req, res){
+    let id = req.params.id.toString();
+    let subject = await Subject.findOne(ObjectId(id)).populate('students');
+    res.status(200).send(subject);
+};
+
 //Enroll student into a subject
 exports.addStudentToSubject = async function (req, res){
     let subject = req.body.subject;
